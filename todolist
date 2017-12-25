@@ -1,0 +1,10 @@
+[done]
+echo "PermitRootLogin yes" /etc/ssh/sshd_config
+systemctl sshd restart
+ssh-copy-id -p 2222 root@localhost
+ln -s /vagrant/work/l-conf/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
+pacman -Syu vim git zsh
+ln -s /vagrant/work/l-conf/vim/vimrc /root/.vimrc
+ln -s /vagrant/work/l-conf/zshrc /root/.zshrc
+[todo]
+quick tdd
