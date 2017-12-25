@@ -8,3 +8,4 @@ ln -s /vagrant/work/l-conf/vim/vimrc /root/.vimrc
 ln -s /vagrant/work/l-conf/zshrc /root/.zshrc
 [todo]
 quick tdd
+test
