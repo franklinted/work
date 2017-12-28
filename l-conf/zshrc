@@ -83,3 +83,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi=vim
+export VISUAL="vim"
+export CPPUTEST_HOME=/root/work/cpputest
+export PATH=/c/ProgramData/Anaconda3/:$PATH
