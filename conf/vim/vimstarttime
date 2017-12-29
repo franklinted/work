@@ -1,0 +1,98 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.010  000.010: --- VIM STARTING ---
+000.129  000.119: Allocated generic buffers
+000.258  000.129: locale set
+000.268  000.010: window checked
+000.816  000.548: inits 1
+001.885  001.069: parsing arguments
+001.894  000.009: expanding arguments
+001.908  000.014: shell init
+002.200  000.292: Termcap init
+002.236  000.036: inits 2
+002.434  000.198: init highlight
+003.552  000.243  000.243: sourcing /usr/share/vim/vimfiles/archlinux.vim
+004.202  001.731  001.488: sourcing /etc/vimrc
+014.533  004.118  004.118: sourcing /usr/share/vim/vim80/syntax/syncolor.vim
+015.695  005.652  001.534: sourcing /usr/share/vim/vim80/syntax/synload.vim
+030.007  013.682  013.682: sourcing /usr/share/vim/vim80/filetype.vim
+030.526  020.959  001.625: sourcing /usr/share/vim/vim80/syntax/syntax.vim
+039.226  001.189  001.189: sourcing /usr/share/vim/vim80/ftoff.vim
+055.921  011.649  011.649: sourcing /root/.vim/autoload/plug.vim
+071.987  010.822  010.822: sourcing /usr/share/vim/vim80/filetype.vim
+073.328  000.136  000.136: sourcing /usr/share/vim/vim80/ftplugin.vim
+075.289  000.155  000.155: sourcing /usr/share/vim/vim80/indent.vim
+076.848  041.060  017.109: sourcing /root/.vimrc.bundles
+078.187  000.042  000.042: sourcing /usr/share/vim/vim80/filetype.vim
+080.526  000.040  000.040: sourcing /usr/share/vim/vim80/ftplugin.vim
+082.397  000.067  000.067: sourcing /usr/share/vim/vim80/indent.vim
+084.512  000.037  000.037: sourcing /usr/share/vim/vim80/filetype.vim
+086.853  000.040  000.040: sourcing /usr/share/vim/vim80/filetype.vim
+088.643  000.034  000.034: sourcing /usr/share/vim/vim80/indent.vim
+090.490  000.033  000.033: sourcing /usr/share/vim/vim80/filetype.vim
+092.263  000.032  000.032: sourcing /usr/share/vim/vim80/ftplugin.vim
+094.196  000.034  000.034: sourcing /usr/share/vim/vim80/filetype.vim
+096.111  000.033  000.033: sourcing /usr/share/vim/vim80/ftplugin.vim
+098.484  000.043  000.043: sourcing /usr/share/vim/vim80/indent.vim
+100.954  000.353  000.353: sourcing /usr/share/vim/vim80/syntax/syncolor.vim
+101.767  093.864  031.057: sourcing $HOME/.vimrc
+101.975  003.946: sourcing vimrc file(s)
+123.538  002.194  002.194: sourcing /root/.vim/bundle/nerdtree/autoload/nerdtree.vim
+133.165  003.440  003.440: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/path.vim
+141.483  001.891  001.891: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/menu_controller.vim
+148.589  001.327  001.327: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/menu_item.vim
+156.237  002.089  002.089: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/key_map.vim
+166.091  002.537  002.537: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/bookmark.vim
+174.842  002.277  002.277: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/tree_file_node.vim
+184.629  003.421  003.421: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/tree_dir_node.vim
+194.510  002.611  002.611: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/opener.vim
+203.444  002.485  002.485: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/creator.vim
+211.728  001.985  001.985: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/flag_set.vim
+218.604  001.530  001.530: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/nerdtree.vim
+228.233  003.287  003.287: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/ui.vim
+236.421  001.882  001.882: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/event.vim
+245.512  002.020  002.020: sourcing /root/.vim/bundle/nerdtree/lib/nerdtree/notifier.vim
+256.079  003.745  003.745: sourcing /root/.vim/bundle/nerdtree/autoload/nerdtree/ui_glue.vim
+305.872  002.192  002.192: sourcing /root/.vim/bundle/nerdtree/nerdtree_plugin/exec_menuitem.vim
+312.627  003.472  003.472: sourcing /root/.vim/bundle/nerdtree/nerdtree_plugin/fs_menu.vim
+314.474  200.190  155.805: sourcing /root/.vim/bundle/nerdtree/plugin/NERD_tree.vim
+317.341  002.532  002.532: sourcing /usr/share/vim/vimfiles/plugin/youcompleteme.vim
+318.050  000.257  000.257: sourcing /usr/share/vim/vim80/plugin/getscriptPlugin.vim
+318.511  000.422  000.422: sourcing /usr/share/vim/vim80/plugin/gzip.vim
+319.073  000.492  000.492: sourcing /usr/share/vim/vim80/plugin/logiPat.vim
+319.166  000.032  000.032: sourcing /usr/share/vim/vim80/plugin/manpager.vim
+319.588  000.401  000.401: sourcing /usr/share/vim/vim80/plugin/matchparen.vim
+320.647  001.023  001.023: sourcing /usr/share/vim/vim80/plugin/netrwPlugin.vim
+320.741  000.034  000.034: sourcing /usr/share/vim/vim80/plugin/rrhelper.vim
+320.869  000.064  000.064: sourcing /usr/share/vim/vim80/plugin/spellfile.vim
+321.244  000.339  000.339: sourcing /usr/share/vim/vim80/plugin/tarPlugin.vim
+321.486  000.165  000.165: sourcing /usr/share/vim/vim80/plugin/tohtml.vim
+321.936  000.414  000.414: sourcing /usr/share/vim/vim80/plugin/vimballPlugin.vim
+322.385  000.386  000.386: sourcing /usr/share/vim/vim80/plugin/zipPlugin.vim
+322.398  013.672: loading plugins
+323.734  001.336: loading packages
+324.851  001.117: loading after plugins
+324.879  000.028: inits 3
+325.701  000.822: reading viminfo
+325.756  000.055: setting raw mode
+325.763  000.007: start termcap
+325.783  000.020: clearing screen
+337.023  001.071  001.071: sourcing /usr/share/vim/vim80/scripts.vim
+359.535  001.240  001.240: sourcing /usr/share/vim/vim80/syntax/pod.vim
+366.526  010.306  009.066: sourcing /usr/share/vim/vim80/syntax/perl.vim
+368.537  001.366  001.366: sourcing /usr/share/vim/vim80/syntax/python.vim
+370.345  029.151  017.479: sourcing /usr/share/vim/vim80/syntax/vim.vim
+376.374  000.554  000.554: sourcing /usr/share/vim/vim80/ftplugin/vim.vim
+381.709  000.298  000.298: sourcing /usr/share/vim/vim80/indent/vim.vim
+382.384  025.527: opening buffers
+383.233  000.849: BufEnter autocommands
+383.241  000.008: editing files in windows
+387.376  001.094  001.094: sourcing /usr/share/vim/vimfiles/autoload/youcompleteme.vim
+615.593  231.258: VimEnter autocommands
+615.600  000.007: before starting main loop
+647.485  031.885: first screen update
+647.493  000.008: --- VIM STARTED ---

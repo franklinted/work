@@ -1,0 +1,86 @@
+" ==========================================
+" inspired by k-vim 
+" bundle 插件管理和配置项
+" ==========================================
+
+"------------------------------------------- begin of configs --------------------------------------------
+
+" ################### 包依赖 #####################
+" package dependence:  ctags, ag(he_silver_searcher)
+" python dependence:   pep8, pyflake
+
+" 非兼容vi模式。去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+set nocompatible
+filetype off " required! turn off
+
+" ################### 插件管理 ###################
+
+" ----------------------------------------------------------------------------
+" 使用 vim-plug 管理插件
+" vim plugin bundle control, command model
+" ----------------------------------------------------------------------------
+
+call plug#begin('~/.vim/bundle')
+
+" 移动光标到插件名上, 使用'#'快速跳转到每个插件的配置处
+
+" nerdtree
+Plug 'scrooloose/nerdtree'
+
+" fugitive use franklinted to support symlinks
+Plug 'franklinted/vim-fugitive'
+
+" auto complete
+" 直接安装yaourt -S vim-youcompleteme-git
+" Plug 'Valloric/YouCompleteMe'
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" nerdtree {{{
+    let NERDTreeHighlightCursorline=1
+    let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+    "close vim if the only window left open is a NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+
+    let g:NERDTreeWinPos="right"
+"    let g:NerdTreeWinSize=12
+
+    map <F8> :TlistToggle<CR>
+    map <F9> :NERDTreeToggle<CR>
+" }}}
+
+
+" ################### 自动补全 ###################
+
+" YouCompleteMe {{{
+    "youcompleteme  默认tab  s-tab 和自动补全冲突
+    "let g:ycm_key_list_select_completion=['<c-n>']
+    let g:ycm_key_list_select_completion = ['<Down>']
+    "let g:ycm_key_list_previous_completion=['<c-p>']
+    let g:ycm_key_list_previous_completion = ['<Up>']
+    let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+    let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+    let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    " 开启语法关键字补全
+    let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+
+    " 跳转到定义处, 分屏打开
+    let g:ycm_goto_buffer_command = 'horizontal-split'
+    " nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+
+    let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
+
+    " 直接触发自动补全 insert模式下
+    " let g:ycm_key_invoke_completion = '<C-Space>'
+    " 黑名单,不启用
+    let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'gitcommit' : 1,
+        \}
+" }}}
+

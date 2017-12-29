@@ -3,12 +3,12 @@
 syntax on
 
 " install bundles
-" if filereadable(expand("~/.vimrc.bundles"))
-"   source ~/.vimrc.bundles
-" elseif filereadable(expand("~/.config/nvim/vimrc.bundles")) " neovim
-"   source ~/.config/nvim/vimrc.bundles
-" endif
-" 
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+elseif filereadable(expand("~/.config/nvim/vimrc.bundles")) " neovim
+  source ~/.config/nvim/vimrc.bundles
+endif
+
 " ensure ftdetect et al work by including this after the bundle stuff
 filetype plugin indent on
 
@@ -43,6 +43,9 @@ set wildignore=*.swp,*.bak,*.pyc,*.class,.svn,.git
 " 好处：误删什么的，如果以前屏幕打开，可以找回
 set t_ti= t_te=
 
+" 启用鼠标
+set mouse=a
+
 set pastetoggle=<F2>            "    when in insert mode, press <F2> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
@@ -76,4 +79,7 @@ autocmd! bufwritepost ~/.vimrc source ~/.vimrc
 set background=dark
 set t_Co=256
 
-" colorscheme solarized
+"A buffer becomes hidden when it is abandoned
+set hidden
+
+set autowriteall

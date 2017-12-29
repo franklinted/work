@@ -1,1 +1,9 @@
 *.un~
+conf/vim/bundle
+conf/vim/*.pyc
+conf/vim/*.bak
+conf/vim/*.bk
+conf/vim/configs
+conf/vim/myconfig.sh
+conf/vim/init.vim
+conf/k-vim

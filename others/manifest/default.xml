@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="origin"
+          fetch=".." />
+
+  <default revision="refs/heads/master"
+           remote="origin"
+           sync-j="2" />
+
+  <project path="manifest" name="franklinted/manifest" />
+  <project path="code" name="franklinted/code" />
+  <project path="conf" name="franklinted/conf" />
+  <project path="docs" name="franklinted/docs" />
+</manifest>

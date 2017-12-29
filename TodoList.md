@@ -1,4 +1,4 @@
-[done]
+# 1.[done] 
 echo "PermitRootLogin yes" /etc/ssh/sshd_config
 systemctl sshd restart
 ssh-copy-id -p 2222 root@localhost
@@ -6,9 +6,12 @@ ln -s /vagrant/work/l-conf/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist
 pacman -Syu vim git zsh
 ln -s /vagrant/work/l-conf/vim/vimrc /root/.vimrc
 ln -s /vagrant/work/l-conf/zshrc /root/.zshrc
-[todo]
+yaourt -S vim-youcompleteme-git
+# 2.[todo]
+vi switch auto write
+use github manage multipi projects
 quick tdd
-[requirements]
+# 3.[requirements]
 LED Driver
 控制16个有两个状态的LED
 可以在不影响其他LED的情况下打开或者关闭任意一个LED
@@ -28,4 +31,3 @@ LED会在内存中映射到一个16位的字上（在一个尚未确定的地址
 查询LED状态
 检查边界值
 检查界外值
-
