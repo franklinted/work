@@ -1,4 +1,8 @@
 " inspired by k-vim 
+
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+
 " 开启语法高亮
 syntax on
 
@@ -49,10 +53,6 @@ set mouse=a
 set pastetoggle=<F2>            "    when in insert mode, press <F2> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
-" disbale paste mode when leaving insert mode
-au InsertLeave * set nopaste
-au InsertEnter * set paste
-
 
 " 相对行号: 行号变成相对，可以用 nj/nk 进行跳转
 set relativenumber number
@@ -65,21 +65,132 @@ function! NumberToggle()
   if(&relativenumber == 1)
     set norelativenumber number
   elseif(&number ==1)
-    set norelativenumber nonumber
-  else
     set relativenumber number  
   endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
 
-" autoload _vimrc
+" autoload .vimrc
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc 
-
-" theme主题
-set background=dark
-set t_Co=256
+autocmd! bufwritepost ~/.vimrc.bundles source ~/.vimrc.bundles 
 
 "A buffer becomes hidden when it is abandoned
 set hidden
 
 set autowriteall
+
+"==========================================
+" Display Settings 展示/排版等界面格式设置
+"==========================================
+
+" theme主题
+set background=dark
+set t_Co=235
+colorscheme solarized
+" colorscheme molokai
+
+" 显示当前的行号列号
+set ruler
+" 在状态栏显示正在输入的命令
+set showcmd
+" 左下角显示当前vim模式
+set showmode
+
+" 在上下移动光标时，光标的上方或下方至少会保留显示的行数
+set scrolloff=5
+
+" set winwidth=79
+
+" 命令行（在状态行下）的高度，默认为1，这里是2
+" set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+" Always show the status line - use 2 lines for the status bar
+set laststatus=2
+
+
+"==========================================
+" FileType Settings  文件类型设置
+"==========================================
+
+" 具体编辑文件类型的一般设置，比如不要 tab 等
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
+autocmd BufRead,BufNewFile *.part set filetype=html
+" disable showmatch when use > in php
+au BufWinEnter *.php set mps-=<:>
+
+
+
+" 保存python文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+" nmap <Leader>r :wa<CR>:!make<CR>
+
+" 按下F5，执行make编译程序，并打开quickfix窗口，显示编译信息  
+nmap <Leader>r :wa<CR><CR><CR> :make<CR><CR><CR> :copen<CR><CR>  
+" 按下F6，光标移到上一个错误所在的行
+map <F6> :cp<CR>
+" 按下F7，光标移到下一个错误所在的行
+map <F7> :cn<CR>
+
+" 定义函数AutoSetFileHead，自动插入文件头
+autocmd BufNewFile *.sh,*.py,*.c,*.cpp exec ":call AutoSetFileHead()"
+let $author_name = "franklin"
+let $author_email = "stranger_2000@163.com"
+function! AutoSetFileHead()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+	call setline(1,"\###################################################################")  
+	call append(line("."), "\# File Name: ".expand("%"))  
+	call append(line(".")+1, "\# Author: ".$author_name)  
+	call append(line(".")+2, "\# mail: ".$author_email)  
+	call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
+	call append(line(".")+4, "\#=============================================================")  
+	call append(line(".")+5, "\#!/bin/bash")  
+	call append(line(".")+6, "")  	
+    endif
+
+    "如果文件类型为python
+    if &filetype == 'python'
+	call setline(1,"\###################################################################")  
+	call append(line("."), "\# File Name: ".expand("%"))  
+	call append(line(".")+1, "\# Author: ".$author_name)  
+	call append(line(".")+2, "\# mail: ".$author_email)  
+	call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
+	call append(line(".")+4, "\#=============================================================")  
+	call append(line(".")+5, "\#!/usr/bin/python")  
+	call append(line(".")+6, "")  
+    endif
+
+    "如果文件类型为c,cpp
+    if &filetype == 'c' || &filetype == 'cpp'
+	call setline(1,"\###################################################################")  
+	call append(line("."), "\# File Name: ".expand("%"))  
+	call append(line(".")+1, "\# Author: ".$author_name)  
+	call append(line(".")+2, "\# mail: ".$author_email)  
+	call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
+	call append(line(".")+4, "\#=============================================================")  
+	call append(line(".")+5, "")  
+    endif
+
+    normal G
+    normal o
+    normal o
+endfunc
+
+"==========================================
+" key map
+"==========================================
+
+" insert mode shortcut
+inoremap  <C-h>   <Left>
+inoremap  <C-j>   <Down>
+inoremap  <C-k>   <Up>
+inoremap  <C-l>   <Right>
+inoremap  <C-d>   <DELETE>
