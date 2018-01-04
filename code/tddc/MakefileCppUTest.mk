@@ -4,7 +4,7 @@
 SILENCE = @
 
 #---- Outputs ----#
-COMPONENT_NAME = BookCode_CppUTest
+COMPONENT_NAME = tddc
 
 #--- Inputs ----#
 CPP_PLATFORM = Gcc

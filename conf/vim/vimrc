@@ -112,14 +112,16 @@ set laststatus=2
 "==========================================
 
 " 具体编辑文件类型的一般设置，比如不要 tab 等
+set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType c,cpp set tabstop=4 shiftwidth=4 noexpandtab ai cindent
+autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab ai
 autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
 autocmd BufRead,BufNewFile *.part set filetype=html
 " disable showmatch when use > in php
-au BufWinEnter *.php set mps-=<:>
-
-
+autocmd BufWinEnter *.php set mps-=<:>
+"在上次退出文件的地方打开文件
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " 保存python文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
@@ -133,7 +135,7 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 " nmap <Leader>r :wa<CR>:!make<CR>
 
 " 按下F5，执行make编译程序，并打开quickfix窗口，显示编译信息  
-nmap <Leader>r :wa<CR><CR><CR> :make<CR><CR><CR> :copen<CR><CR>  
+nmap <Leader>r :make<CR><CR><CR> :copen<CR><CR>  
 " 按下F6，光标移到上一个错误所在的行
 map <F6> :cp<CR>
 " 按下F7，光标移到下一个错误所在的行
@@ -146,37 +148,37 @@ let $author_email = "stranger_2000@163.com"
 function! AutoSetFileHead()
     "如果文件类型为.sh文件
     if &filetype == 'sh'
-	call setline(1,"\###################################################################")  
-	call append(line("."), "\# File Name: ".expand("%"))  
-	call append(line(".")+1, "\# Author: ".$author_name)  
-	call append(line(".")+2, "\# mail: ".$author_email)  
-	call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
-	call append(line(".")+4, "\#=============================================================")  
-	call append(line(".")+5, "\#!/bin/bash")  
-	call append(line(".")+6, "")  	
+        call setline(1,"\###################################################################")  
+        call append(line("."), "\# File Name: ".expand("%"))  
+        call append(line(".")+1, "\# Author: ".$author_name)  
+        call append(line(".")+2, "\# mail: ".$author_email)  
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
+        call append(line(".")+4, "\#=============================================================")  
+        call append(line(".")+5, "\#!/bin/bash")  
+        call append(line(".")+6, "")    
     endif
 
     "如果文件类型为python
     if &filetype == 'python'
-	call setline(1,"\###################################################################")  
-	call append(line("."), "\# File Name: ".expand("%"))  
-	call append(line(".")+1, "\# Author: ".$author_name)  
-	call append(line(".")+2, "\# mail: ".$author_email)  
-	call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
-	call append(line(".")+4, "\#=============================================================")  
-	call append(line(".")+5, "\#!/usr/bin/python")  
-	call append(line(".")+6, "")  
+        call setline(1,"\###################################################################")  
+        call append(line("."), "\# File Name: ".expand("%"))  
+        call append(line(".")+1, "\# Author: ".$author_name)  
+        call append(line(".")+2, "\# mail: ".$author_email)  
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
+        call append(line(".")+4, "\#=============================================================")  
+        call append(line(".")+5, "\#!/usr/bin/python")  
+        call append(line(".")+6, "")  
     endif
 
     "如果文件类型为c,cpp
     if &filetype == 'c' || &filetype == 'cpp'
-	call setline(1,"\###################################################################")  
-	call append(line("."), "\# File Name: ".expand("%"))  
-	call append(line(".")+1, "\# Author: ".$author_name)  
-	call append(line(".")+2, "\# mail: ".$author_email)  
-	call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
-	call append(line(".")+4, "\#=============================================================")  
-	call append(line(".")+5, "")  
+        call setline(1,"\###################################################################")  
+        call append(line("."), "\# File Name: ".expand("%"))  
+        call append(line(".")+1, "\# Author: ".$author_name)  
+        call append(line(".")+2, "\# mail: ".$author_email)  
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))  
+        call append(line(".")+4, "\#=============================================================")  
+        call append(line(".")+5, "")  
     endif
 
     normal G

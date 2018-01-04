@@ -33,6 +33,11 @@ call plug#begin('~/.vim/bundle')
 " support git. franklinted's to support symlinks
 Plug 'franklinted/vim-fugitive'
 
+" 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'SirVer/ultisnips'
+" 自动补全单引号，双引号等
+Plug 'Raimondi/delimitMate'
 " 自动补全html/xml标签
 Plug 'docunext/closetag.vim', { 'for': ['html', 'xml'] }
 
