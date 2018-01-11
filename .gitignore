@@ -9,5 +9,6 @@ conf/vim/init.vim
 conf/k-vim
 code/tddc/lib
 code/tddc/objs
+code/tddc/tags
 code/tddc/tddc_tests
 software

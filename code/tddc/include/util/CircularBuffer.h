@@ -25,52 +25,19 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+#ifndef D_CircularBuffer_H
+#define D_CircularBuffer_H
 
+typedef struct CircularBufferStruct * CircularBuffer;
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
-
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
-
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
-
-
-#endif  /* D_LedDriver_H */
-
-
-#endif
+CircularBuffer CircularBuffer_Create(int capacity);
+void CircularBuffer_Destroy(CircularBuffer);
+int CircularBuffer_IsEmpty(CircularBuffer);
+int CircularBuffer_IsFull(CircularBuffer);
+int CircularBuffer_Put(CircularBuffer, int);
+int CircularBuffer_Get(CircularBuffer);
+int CircularBuffer_Capacity(CircularBuffer);
+void CircularBuffer_Print(CircularBuffer);
+int CircularBuffer_VerifyIntegrity(CircularBuffer);
+#endif  /* D_CircularBuffer_H */

@@ -24,53 +24,20 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
+#ifndef D_Thread_H
+#define D_Thread_H
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
-
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+typedef struct ThreadStruct * Thread;
+typedef void * (*ThreadEntryFunction)(void *);
 
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
+Thread Thread_Create(ThreadEntryFunction f, void * parameter);
+void Thread_Start(Thread);
+void Thread_Destroy(Thread);
 
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
+void Thread_Join(Thread, void **result);
+void * Thread_Result(Thread);
+void MyOs_Init(int maxThreads);
+void MyOs_ShutDown(void);
 
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
-
-
-#endif  /* D_LedDriver_H */
-
-
-#endif
+#endif  /* D_Thread_H */

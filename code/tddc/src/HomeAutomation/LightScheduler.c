@@ -1,9 +1,9 @@
 /***
  * Excerpted from "Test-Driven Development for Embedded C",
  * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
+ * Copyrights apply to this code. It may not be used to create training material,
  * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
+ * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/jgade for more book information.
 ***/
 /*- ------------------------------------------------------------------ -*/
@@ -24,53 +24,66 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
+#include "LightScheduler.h"
+#include "LightController.h"
+#include "common.h"
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+enum
+{
+    UNUSED = -1,
+    TURN_OFF, TURN_ON,
+    MAX_EVENTS = 128
+};
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+typedef struct
+{
+	int id;
+	int minuteOfDay;
+	int event;
+} ScheduledLightEvent;
 
+static ScheduledLightEvent scheduledEvent;
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
+void LightScheduler_Create(void)
+{
+	scheduledEvent.id = UNUSED;
+}
 
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
+void LightScheduler_Destroy(void)
+{
+}
 
-/*
- * Intermediate examples below this comment
- */
+static void scheduleEvent(int id, Day day, int minuteOfDay, int event)
+{
+	scheduledEvent.id = id;
+	scheduledEvent.minuteOfDay = minuteOfDay;
+	scheduledEvent.event = event;
+}
 
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
+void LightScheduler_ScheduleTurnOn(int id, Day day, int minuteOfDay)
+{
+	scheduleEvent(id, day, minuteOfDay, TURN_ON);
+}
 
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
+void LightScheduler_ScheduleTurnOff(int id, Day day, int minuteOfDay)
+{
+    scheduleEvent(id, day, minuteOfDay, TURN_OFF);
+}
 
-#endif  /* D_LedDriver_H */
+void LightScheduler_Wakeup(void)
+{
+    Time time;
+    TimeService_GetTime(&time);
+	if (scheduledEvent.id == UNUSED)
+		return;
 
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
+	if(time.minuteOfDay != scheduledEvent.minuteOfDay)
+		return;
 
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
+	if(scheduledEvent.event == TURN_ON)
+		LightController_On(scheduledEvent.id);
+	else if(scheduledEvent.event == TURN_OFF)
+		LightController_Off(scheduledEvent.id);
 
-#endif
+}
 
-
-#endif  /* D_LedDriver_H */
-
-
-#endif

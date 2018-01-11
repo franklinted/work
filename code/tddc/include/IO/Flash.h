@@ -25,52 +25,23 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+#ifndef D_Flash_H
+#define D_Flash_H
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+#include "IO.h"
 
+void Flash_Create(void);
+void Flash_Destroy(void);
+int Flash_Write(ioAddress offset, ioData data);
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
-
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
-
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
-
-
-#endif  /* D_LedDriver_H */
-
-
-#endif
+typedef enum
+{
+	FLASH_SUCCESS = 0,
+	FLASH_VPP_ERROR,
+	FLASH_PROGRAM_ERROR,
+	FLASH_PROTECTED_BLOCK_ERROR,
+	FLASH_UNKNOWN_PROGRAM_ERROR,
+	FLASH_READ_BACK_ERROR,
+	FLASH_TIMEOUT_ERROR
+} FlashStatus;
+#endif  /* D_Flash_H */

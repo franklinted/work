@@ -24,53 +24,24 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
+#ifndef D_RtcTime_H
+#define D_RtcTime_H
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+#include "common.h"
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+typedef struct RtcTime RtcTime;
 
+RtcTime * RtcTime_Create(int daysSince1980);
+void RtcTime_Destroy(RtcTime *);
+int RtcTime_GetYear(RtcTime *);
+int RtcTime_GetMonth(RtcTime *);
+int RtcTime_GetDayOfMonth(RtcTime *);
+int RtcTime_GetDayOfWeek(RtcTime *);
+BOOL isLeapYear(int year);
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
-
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
-
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
+enum {
+    Sunday = 0, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+};
 
 
-#endif  /* D_LedDriver_H */
-
-
-#endif
+#endif  /* D_RtcTime_H */

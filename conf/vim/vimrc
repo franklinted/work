@@ -132,10 +132,8 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-" nmap <Leader>r :wa<CR>:!make<CR>
-
 " 按下F5，执行make编译程序，并打开quickfix窗口，显示编译信息  
-nmap <Leader>r :make<CR><CR><CR> :copen<CR><CR>  
+nmap <Leader>m :make<CR><CR><CR> :copen<CR><CR>  
 " 按下F6，光标移到上一个错误所在的行
 map <F6> :cp<CR>
 " 按下F7，光标移到下一个错误所在的行

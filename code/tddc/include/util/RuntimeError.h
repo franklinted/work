@@ -25,52 +25,13 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+#ifndef D_RuntimeError_H
+#define D_RuntimeError_H
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+void RuntimeError(const char * message, int parameter,
+		  const char * file, int line);
 
-
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
-
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
-
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
-
-
-#endif  /* D_LedDriver_H */
-
+#define RUNTIME_ERROR(description, parameter)\
+    RuntimeError(description, parameter, __FILE__, __LINE__)
 
 #endif

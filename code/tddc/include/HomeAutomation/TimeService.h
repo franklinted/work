@@ -25,52 +25,26 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+#ifndef D_TimeService_H
+#define D_TimeService_H
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+typedef struct Time
+{
+    int minuteOfDay;
+    int dayOfWeek;
+} Time;
 
+void TimeService_Create(void);
+void TimeService_Destroy(void);
+void TimeService_GetTime(Time *);
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
+typedef void (*WakeUpCallback)(void);
 
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
+void TimeService_SetPeriodicAlarmInSeconds(
+        int seconds, WakeUpCallback);
 
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
+void TimeService_CancelPeriodicAlarmInSeconds(
+        int seconds, WakeUpCallback);
 
 
-#endif  /* D_LedDriver_H */
-
-
-#endif
+#endif  /* D_TimeService_H */

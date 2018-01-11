@@ -10,11 +10,11 @@ COMPONENT_NAME = tddc
 CPP_PLATFORM = Gcc
 PROJECT_HOME_DIR = .
 SRC_DIRS = \
-	src/LedDriver \
+	src/HomeAutomation \
 
 TEST_SRC_DIRS = \
 	tests\
-	tests/LedDriver\
+	tests/HomeAutomation\
 	
 INCLUDE_DIRS =\
   .\

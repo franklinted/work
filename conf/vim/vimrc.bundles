@@ -47,6 +47,9 @@ Plug 'scrooloose/nerdtree'
 " Source code brower (supports C/C++,java,perl,python,tcl,sql,php,etc)
 Plug 'vim-scripts/taglist.vim'
 
+" GDB command line interface and terminal emulator in Vim.
+Plug 'Conque-GDB'
+
 " 主题 solarized
 " solarized
 Plug 'altercation/vim-colors-solarized'
@@ -94,7 +97,7 @@ call plug#end()
 
 " Taglist {{{
     let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
-    map <F8> :TlistToggle<CR>
+    map <Leader>t :TlistToggle<CR>
 " }}}
 
 

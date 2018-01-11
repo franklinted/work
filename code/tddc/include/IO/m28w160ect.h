@@ -25,52 +25,31 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+#ifndef D_m28w160ect_H
+#define D_m28w160ect_H
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+typedef enum
+{
+	CommandRegister = 0x0,
+	StatusRegister = 0x0
+} Flash_Registers;
 
+typedef enum
+{
+	ProgramCommand = 0x40,
+	Reset = 0xff
+} Flash_Command;
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
+typedef enum
+{
+	ReadyBit = 1<<7,
+	EraseSuspendBit = 1<<6,
+	EraseErrorBit = 1<<5,
+	ProgramErrorBit = 1<<4,
+	VppErrorBit = 1<<3,
+	ProgramSuspendBit = 1<<2,
+	BlockProtectionErrorBit = 1<<1,
+	ReservedBit = 1
+} StatusRegisterBits;
 
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
-
-/*
- * Intermediate examples below this comment
- */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
-
-
-#endif  /* D_LedDriver_H */
-
-
-#endif
+#endif /* _m28w160ect_H */

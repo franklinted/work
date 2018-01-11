@@ -25,52 +25,37 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-#include <stdint.h>
+#ifndef D_DvRecorder_H
+#define D_DvRecorder_H
 
-#define TRUE 1
-#define FALSE 0
-typedef int BOOL;
+typedef struct Program
+{
+    const char * name;
+    int repeat;
+    int channel;
+    int startHour;
+    int startMinute;
+    int durationInMinutes;
+    int priority;
+    int preferences;
+} Program;
 
+enum {
+    ALL_EPISODES, NEW_EPISODES, REPEATED_EPISODES,
+    REPEAT, NO_REPEAT,
+    LOW_PRIORITY, MEDIUM_PRIORITY, HIGH_PRIORITY
+};
 
-void LedDriver_Create(uint16_t * ledsAddress);
-void LedDriver_Destroy(void);
+typedef struct
+{
+    int programCount;
+    Program programs[100];
+    /* etc... */
+} DvRecorder;
 
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-void LedDriver_TurnAllOn(void);
-void LedDriver_TurnAllOff(void);
-BOOL LedDriver_IsOn(int ledNumber);
-BOOL LedDriver_IsOff(int ledNumber);
-#endif  /* D_LedDriver_H */
+void DvrRecorder_Create(void);
+void DvRecorder_RestorePrograms(DvRecorder *);
 
-/*
- * Intermediate examples below this comment
- */
+void DvRecorder_Destroy(void);
 
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-
-#endif  /* D_LedDriver_H */
-
-#if 0 
-#ifndef D_LedDriver_H
-#define D_LedDriver_H
-
-void LedDriver_Create(void);
-void LedDriver_Destroy(void);
-void LedDriver_TurnOn(int ledNumber);
-void LedDriver_TurnOff(int ledNumber);
-
-#endif
-
-
-#endif  /* D_LedDriver_H */
-
-
-#endif
+#endif  /* D_DvRecorder_H */
