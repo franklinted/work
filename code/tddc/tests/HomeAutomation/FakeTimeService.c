@@ -59,3 +59,17 @@ void FakeTimeService_SetDay(int day)
     fakeTime.dayOfWeek = day;
 }
 
+void TimeService_SetPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb)
+{
+	callback = cb;
+	period = seconds;
+}
+
+void TimeService_CancelPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb)
+{
+	if (cb == callback && period == seconds)
+	{
+		callback = NULL;
+		period = 0;
+	}
+}

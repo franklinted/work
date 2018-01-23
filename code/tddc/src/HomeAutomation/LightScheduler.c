@@ -40,6 +40,7 @@ typedef struct
 	int id;
 	int minuteOfDay;
 	int event;
+	Day day;
 } ScheduledLightEvent;
 
 static ScheduledLightEvent scheduledEvent;
@@ -47,10 +48,12 @@ static ScheduledLightEvent scheduledEvent;
 void LightScheduler_Create(void)
 {
 	scheduledEvent.id = UNUSED;
+	TimeService_SetPeriodicAlarmInSeconds(60,LightScheduler_Wakeup);
 }
 
 void LightScheduler_Destroy(void)
 {
+	TimeService_CancelPeriodicAlarmInSeconds(60,LightScheduler_Wakeup);
 }
 
 static void scheduleEvent(int id, Day day, int minuteOfDay, int event)
@@ -58,6 +61,7 @@ static void scheduleEvent(int id, Day day, int minuteOfDay, int event)
 	scheduledEvent.id = id;
 	scheduledEvent.minuteOfDay = minuteOfDay;
 	scheduledEvent.event = event;
+	scheduledEvent.day = day;
 }
 
 void LightScheduler_ScheduleTurnOn(int id, Day day, int minuteOfDay)
@@ -70,20 +74,36 @@ void LightScheduler_ScheduleTurnOff(int id, Day day, int minuteOfDay)
     scheduleEvent(id, day, minuteOfDay, TURN_OFF);
 }
 
+static void operateLight(ScheduledLightEvent * lightEvent)
+{
+	if(lightEvent->event == TURN_ON)
+		LightController_On(lightEvent->id);
+	else if(lightEvent->event == TURN_OFF)
+		LightController_Off(lightEvent->id);
+}
+
+static void processEventsDueNow(Time * time, ScheduledLightEvent * lightEvent)
+{
+	int reactionDay = lightEvent->day;
+    int today = time->dayOfWeek;
+
+	if (lightEvent->id == UNUSED)
+		return;
+
+	if (lightEvent->day != EVERYDAY &&reactionDay != today)
+		return;
+
+	if (lightEvent->minuteOfDay != time->minuteOfDay)
+		return;
+
+	operateLight(lightEvent);
+}
+
 void LightScheduler_Wakeup(void)
 {
     Time time;
     TimeService_GetTime(&time);
-	if (scheduledEvent.id == UNUSED)
-		return;
 
-	if(time.minuteOfDay != scheduledEvent.minuteOfDay)
-		return;
-
-	if(scheduledEvent.event == TURN_ON)
-		LightController_On(scheduledEvent.id);
-	else if(scheduledEvent.event == TURN_OFF)
-		LightController_Off(scheduledEvent.id);
-
+	processEventsDueNow(&time, &scheduledEvent);
 }
 

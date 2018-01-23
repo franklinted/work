@@ -42,25 +42,73 @@ TEST_GROUP(LightScheduler)
 };
 
 
+void setTimeTo(int day, int miniteOfDay)
+{
+	FakeTimeService_SetDay(day);
+	FakeTimeService_SetMinute(miniteOfDay);
+}
+
+void checkLightState(int id, int level)
+{
+	LONGS_EQUAL(id, LightControllerSpy_GetLastId());
+	LONGS_EQUAL(level, LightControllerSpy_GetLastState());
+}
+
+TEST(LightScheduler, ScheduleWeekEndItsMonday)
+{
+	LightScheduler_ScheduleTurnOn(3, WEEKEND, 1200);
+	setTimeTo(MONDAY, 1200);
+	LightScheduler_Wakeup();
+	checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
+}
+
 TEST(LightScheduler, ScheduleOnEverydayNotTimeYet)
 {
 	LightScheduler_ScheduleTurnOn(3,EVERYDAY,1200);
-	FakeTimeService_SetDay(MONDAY);
-	FakeTimeService_SetMinute(1200);
+	setTimeTo(EVERYDAY, 1200);
 	LightScheduler_Wakeup();
-
-	LONGS_EQUAL(3, LightControllerSpy_GetLastId());
-	LONGS_EQUAL(LIGHT_ON, LightControllerSpy_GetLastState());
-
+	checkLightState(3, LIGHT_ON);
 }
 
 TEST(LightScheduler, NoScheduleNothingHappens)
 {
-	FakeTimeService_SetDay(MONDAY);
-	FakeTimeService_SetMinute(100);
+	setTimeTo(MONDAY, 100);
 	LightScheduler_Wakeup();
+	checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
+}
 
-	LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
-	LONGS_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_GetLastState());
+TEST(LightScheduler, ScheduleTuesdayButItsMonday)
+{
+	LightScheduler_ScheduleTurnOn(3, TUESDAY, 1200);
+	setTimeTo(MONDAY, 1200);
+	LightScheduler_Wakeup();
+	checkLightState(LIGHT_ID_UNKNOWN, LIGHT_STATE_UNKNOWN);
+}
 
+TEST(LightScheduler, ScheduleTuesdayAndItsTuesday)
+{
+	LightScheduler_ScheduleTurnOn(3,TUESDAY,1200);
+	setTimeTo(TUESDAY, 1200);
+	LightScheduler_Wakeup();
+	checkLightState(3, LIGHT_ON);
+}
+
+TEST_GROUP(LightSchedulerInitAndCleanup)
+{
+
+};
+
+TEST(LightSchedulerInitAndCleanup, CreateStartsOneMinuteAlarm)
+{
+	LightScheduler_Create();
+	POINTERS_EQUAL((void *)LightScheduler_Wakeup, (void *)FakeTimeSource_GetAlarmCallback());
+	LONGS_EQUAL(60, FakeTimeSource_GetAlarmPeriod());
+	LightScheduler_Destroy();
+}
+
+TEST(LightSchedulerInitAndCleanup, DestroyCancelsOneMinuteAlarm)
+{
+	LightScheduler_Create();
+	LightScheduler_Destroy();
+	POINTERS_EQUAL(NULL, (void *)FakeTimeSource_GetAlarmCallback());
 }
