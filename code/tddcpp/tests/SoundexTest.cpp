@@ -22,10 +22,8 @@ TEST_F(SoundexEncoding, RetainSoleLetterWord) {
 TEST_F(SoundexEncoding, PadWithZerosToEnsureThreeDigits) {
 	ASSERT_THAT(soundex.encode("I"), Eq("I000"));
 }
-/*
-int main(int argc, char **argv) {
-  // 规定的 2 行代码
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+
+TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
+	EXPECT_THAT(soundex.encode("Ab"), Eq("A100"));
+	EXPECT_THAT(soundex.encode("Ac"), Eq("A200"));
 }
-*/

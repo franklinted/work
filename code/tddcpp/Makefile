@@ -19,11 +19,10 @@ TEST_SRC_DIRS = \
 	
 INCLUDE_DIRS =\
   .\
-  $(CPPUTEST_HOME)/include\
-  include/Cpp\
+  include\
 	
-CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror 
-CPPUTEST_CFLAGS += -Wall -Wstrict-prototypes -pedantic
+GTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror 
+GTEST_CPPFLAGS += -Wall -pedantic -std=c++11
 LD_LIBRARIES = -lpthread
 	
 include MakefileWorker.mk

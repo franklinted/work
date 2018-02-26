@@ -387,7 +387,6 @@ all: start $(TEST_TARGET)
 
 .PHONY: start
 start: $(TEST_TARGET)
-	$(SILENCE)START_TIME=$(call time)
 
 .PHONY: all_no_tests
 all_no_tests: $(TEST_TARGET)
