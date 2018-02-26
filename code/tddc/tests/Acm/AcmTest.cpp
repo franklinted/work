@@ -13,7 +13,7 @@ TEST_GROUP(Acm)
 	}
 };
 
-TEST(Acm, IBM_MinusOne)
+TEST(Acm, IBM_MinusOne1)
 {
 	Acm_IBM_MinusOne();
 }

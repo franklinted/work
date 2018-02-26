@@ -23,13 +23,13 @@ string MinusOne(int len, string s)
 
 void Acm_IBM_MinusOne()
 {
-    int n,len,index=1;
+    int n,index=1;
     string s;
     cin>>n;
     getchar();
     while(n--){
         getline(cin,s);
-        len=s.size();
+        //len=s.size();
         printf("String #%d\n",index++);
             printf("\n\n");
 

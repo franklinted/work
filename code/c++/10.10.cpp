@@ -1,0 +1,56 @@
+/*************************************************************************
+    * File Name: 10.10.cpp
+    * Author: Franklin
+    * Mail: stranger_2000@163.com
+    * Created Time: 2017-09-07
+ ************************************************************************/
+
+#include<iostream>
+using namespace std;
+
+class Mammal
+{
+public:
+	void FeedBabyMilk()
+	{
+		cout << "Mammal: Baby says glug!" << endl;
+	}
+};
+
+class Reptile
+{
+public:
+	void SpitVenom()
+	{
+		cout << "Reptile: Shoo enemy! Spits venom!" << endl;
+	}
+};
+
+class Bird
+{
+public:
+	void LayEggs()
+	{
+		cout << "Bird: Laid my eggs, am lighter now!" << endl;
+	}
+};
+
+class Platypus: public Mammal, public Bird, public Reptile
+{
+public:
+	void Swim()
+	{
+		cout << "Platpus: Voila, I can swim!" << endl;
+	}
+};
+
+int main()
+{
+	Platypus realFreak;
+	realFreak.LayEggs();
+	realFreak.FeedBabyMilk();
+	realFreak.SpitVenom();
+	realFreak.Swim();
+
+	return 0;
+}
