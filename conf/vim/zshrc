@@ -86,4 +86,5 @@ alias vi=vim
 alias pcs=baidupcs
 export VISUAL="vim"
 export CPPUTEST_HOME=~/work/software/cpputest
-export PATH=/c/ProgramData/Anaconda3/:$PATH
+export DPDK_DIR=/root/dpdk-stable-17.11.2
+export RTE_SDK=/root/dpdk-stable-17.11.2

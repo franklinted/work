@@ -36,6 +36,10 @@ filetype plugin indent on
 " 文件修改之后自动载入
 set autoread
 
+" 设置tags
+set tags=tags;
+set autochdir
+
 " 取消备份。 视情况自己改
 set nobackup
 " 关闭交换文件
@@ -86,7 +90,7 @@ set autowriteall
 " theme主题
 set background=dark
 set t_Co=235
-colorscheme solarized
+" colorscheme solarized
 " colorscheme molokai
 
 " 显示当前的行号列号
